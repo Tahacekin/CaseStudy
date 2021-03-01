@@ -8,19 +8,98 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State var searchText = ""
+    @State var isSearching = false
+    
     var body: some View {
-        
         NavigationView {
-        List {
+        
+        ScrollView {
+         
+            HStack {
+                HStack {
+                
+              TextField("Search for the Games", text: $searchText)
+                .padding(.leading , 20)
+                    
+                } .padding()
+                .background(Color(.systemGray3))
+                .cornerRadius(15)
+                .padding(.horizontal)
+                .onTapGesture {
+                    isSearching = true
+                }
+                .overlay(
+                
+                    HStack {
+                       
+                        
+                        
+                      Image(systemName: "magnifyingglass")
+                      Spacer()
+                      
+                        if isSearching {
+                            
+                    Button(action: { searchText.removeAll() }, label: {
+                     Image(systemName: "x.circle.fill")
+                            })
+                            
+                           
+                            
+                        }
+                        
+                      
+                        
+                        
+                    }
+                    .padding(.horizontal, 23)
+                    .foregroundColor(.gray)
+                
+            ) .transition(.move(edge: .trailing))
+                .animation(.spring())
             
-            Text("Games")
-           
+                if isSearching {
+                
+                    Button(action: { searchText.removeAll()
+                        isSearching = false
+                   
+                    
+                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                        
+                    
+                    }, label: {
+                    Text("Cancel")
+                        .padding(.trailing)
+                        .padding(.leading , -15)
+                })
+                    .transition(.move(edge: .trailing))
+                    .animation(.spring())
+                
+                }
             
+            }
             
-        }.navigationBarTitle("Games")
+ 
+            
+ ForEach((0..<21).filter({ "\($0)".contains(searchText) || searchText.isEmpty }) , id: \.self) { num in
+        
+        HStack {
+        Text(String(num))
+        Spacer()
+        }
+        .padding()
+        
+        
+        Divider()
+                
+                
+    } .navigationBarTitle("Games")
         
         }
         
+     }
+    
     }
 }
 
