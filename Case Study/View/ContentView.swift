@@ -71,7 +71,7 @@ struct ContentView: View {
                     }, label: {
                     Text("Cancel")
                         .padding(.trailing)
-                        .padding(.leading , -15)
+                        .padding(.leading , -1)
                 })
                     .transition(.move(edge: .trailing))
                     .animation(.spring())
