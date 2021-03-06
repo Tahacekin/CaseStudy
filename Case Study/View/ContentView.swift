@@ -7,99 +7,125 @@
 
 import SwiftUI
 
-struct ContentView: View {
+
+extension String {
     
-    @State var searchText = ""
-    @State var isSearching = false
+    func load() -> UIImage {
+        do {
+            
+            guard  let url = URL(string: self)  else {
+                return UIImage()
+            }
+            let data: Data = try Data(contentsOf: url)
+            return UIImage(data: data)
+            ?? UIImage()
+        }
+        catch {
+            print(error)
+        }
+
+        return UIImage()
+        
+        
+        
+           
+    }
+}
+
+
+struct Response: Codable {
+    var results:[Results]
+}
+
+
+
+struct Results: Codable {
+    var id:Int
+    var name:String
+    var metacritic:Int
+    var background_image:String
+      
+
+    }
+    
+
+struct ContentView: View {
+    @State var gameData = [Results]()
+   
     
     var body: some View {
         NavigationView {
         
-        ScrollView {
+        
          
-            HStack {
-                HStack {
-                
-              TextField("Search for the Games", text: $searchText)
-                .padding(.leading , 20)
-                    
-                } .padding()
-                .background(Color(.systemGray3))
-                .cornerRadius(15)
-                .padding(.horizontal)
-                .onTapGesture {
-                    isSearching = true
-                }
-                .overlay(
-                
-                    HStack {
-                       
-                        
-                        
-                      Image(systemName: "magnifyingglass")
-                      Spacer()
-                      
-                        if isSearching {
-                            
-                    Button(action: { searchText.removeAll() }, label: {
-                     Image(systemName: "x.circle.fill")
-                            })
-                            
-                           
-                            
-                        }
-                        
-                      
-                        
-                        
-                    }
-                    .padding(.horizontal, 23)
-                    .foregroundColor(.gray)
-                
-            ) .transition(.move(edge: .trailing))
-                .animation(.spring())
-            
-                if isSearching {
-                
-                    Button(action: { searchText.removeAll()
-                        isSearching = false
-                   
-                    
-                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-                        
-                    
-                    }, label: {
-                    Text("Cancel")
-                        .padding(.trailing)
-                        .padding(.leading , -1)
-                })
-                    .transition(.move(edge: .trailing))
-                    .animation(.spring())
-                
-                }
-            
-            }
             
  
             
- ForEach((0..<21).filter({ "\($0)".contains(searchText) || searchText.isEmpty }) , id: \.self) { num in
-        
-        HStack {
-        Text(String(num))
-        Spacer()
-        }
-        .padding()
-        
-        
-        Divider()
+            List(gameData , id: \.id) { item in
                 
+                HStack() {
+                   
+                    Image(uiImage: item.background_image.load())
+                        .resizable()
+                        .frame(width: 175 , height: 100)
+                    
+                    
+                    VStack(alignment: .leading) {
+                        Text(item.name)
+                            .font(.headline)
+                            .fontWeight(.bold)
+                        Spacer()
+                        
+                        HStack {
+                        
+                        Text("Metacritic:")
+                            
+                        Text(String(item.metacritic))
+                            .font(.headline)
+                            .fontWeight(.bold)
+                            .foregroundColor(Color.red)
+                        }
+                        
+                    }
+                    
                 
-    } .navigationBarTitle("Games")
+                }
+            }.onAppear(perform: {
+                loadData()
+            })
+            .navigationBarTitle("Games")
+
         
-        }
+        
         
      }
     
+    }
+    
+    func loadData() {
+        guard let url = URL(string: "https://api.rawg.io/api/games?page_size=10&page=1") else {
+            
+            print("Invalid URL")
+            return }
+    
+        let request = URLRequest(url: url)
+    
+        
+  URLSession.shared.dataTask(with: request) { data , response , error in
+            
+    if let data = data {
+        
+        
+        if let decodedResponse = try? JSONDecoder().decode(Response.self, from: data) {
+            DispatchQueue.main.async {
+                self.gameData = decodedResponse.results
+            }
+            return
+        }
+        
+    }
+    print("Fetch failed: \(error?.localizedDescription ?? "Unkown error")")
+  }.resume()
     }
 }
 

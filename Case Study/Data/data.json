@@ -1,0 +1,92 @@
+struct APIData {
+    @State var data = GameData(results: Results(name: "GTA", metacritic: 96), genres: Genres(name: "Action"))
+   
+   
+       
+       
+        func getData() {
+           let urlString = "https://api.rawg.io/api/games?page_size=10&page=1"
+           let url = URL(string: urlString)
+           
+           // We have to start a URL sessioan to start the sessioan for the call of the API
+           
+           URLSession.shared.dataTask(with: url!) { data , _ , error in
+               DispatchQueue.main.async {
+                   if let data = data {
+                      
+                       do {
+                           let decoder = JSONDecoder()
+                           let decodedData = try decoder.decode(GameData.self, from: data)
+                           self.data = decodedData
+                           
+                       }
+                       catch {
+                           
+                           print(error)
+                           
+                       }
+                   }
+
+               }
+               
+               
+
+           }.resume()
+      
+       }
+}
+
+@State var apiData = APIData()
+
+
+
+-----------------------------------------
+
+struct GameData: Codable {
+    var id = UUID()
+    var results:Results
+    var genres:Genres
+}
+
+
+
+struct Results: Identifiable, Codable {
+    var id = UUID()
+    var name:String
+    var metacritic:Int
+    
+}
+
+struct Genres: Identifiable , Codable {
+    var id = UUID()
+    var name:String
+    
+    
+}
+
+
+-----------------------------------------
+
+.filter({ "\($0)".contains(searchText) || searchText.isEmpty })
+
+-----------------------------------------
+
+
+
+-----------------------------------------
+
+class GameDataModel:ObservableObject {
+    @Published var gmdModel = [GameData]()
+    
+    init() {
+        Api().getData(completion: { (gm) in
+            self.gmdModel = gm
+        })
+    }
+}
+-----------------------------------------
+
+
+
+
+.filter({ "\($0)".contains(searchText) || searchText.isEmpty }) , id: \.self) { item in

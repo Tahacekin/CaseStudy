@@ -6,3 +6,12 @@
 //
 
 import Foundation
+
+// Get name
+// Get "metacritic"
+
+// Get "genres"
+
+
+
+
