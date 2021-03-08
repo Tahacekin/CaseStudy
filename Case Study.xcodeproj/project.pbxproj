@@ -14,11 +14,10 @@
 		E8AE958B25EAD9FB003FF8B0 /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = E8AE958A25EAD9FB003FF8B0 /* data.json */; };
 		E8AE958F25EADA1D003FF8B0 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AE958E25EADA1D003FF8B0 /* DataService.swift */; };
 		E8AE959325EADA3A003FF8B0 /* Case Study.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AE959225EADA3A003FF8B0 /* Case Study.swift */; };
-		E8AE959625EADA4F003FF8B0 /* CaseStudy Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AE959525EADA4F003FF8B0 /* CaseStudy Model.swift */; };
 		E8AE959925EADBB0003FF8B0 /* DataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AE959825EADBB0003FF8B0 /* DataView.swift */; };
 		E8AE959C25EADBC0003FF8B0 /* CSTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AE959B25EADBC0003FF8B0 /* CSTabView.swift */; };
 		E8AE95A125EAE16A003FF8B0 /* FavouritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AE95A025EAE16A003FF8B0 /* FavouritesView.swift */; };
-		E8C1D4AA25F1754100591272 /* DataServiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C1D4A925F1754100591272 /* DataServiveView.swift */; };
+		E8E4A70725F6B690006843CA /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E4A70625F6B690006843CA /* Post.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,11 +30,10 @@
 		E8AE958A25EAD9FB003FF8B0 /* data.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = data.json; sourceTree = "<group>"; };
 		E8AE958E25EADA1D003FF8B0 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		E8AE959225EADA3A003FF8B0 /* Case Study.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Case Study.swift"; sourceTree = "<group>"; };
-		E8AE959525EADA4F003FF8B0 /* CaseStudy Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CaseStudy Model.swift"; sourceTree = "<group>"; };
 		E8AE959825EADBB0003FF8B0 /* DataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataView.swift; sourceTree = "<group>"; };
 		E8AE959B25EADBC0003FF8B0 /* CSTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSTabView.swift; sourceTree = "<group>"; };
 		E8AE95A025EAE16A003FF8B0 /* FavouritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesView.swift; sourceTree = "<group>"; };
-		E8C1D4A925F1754100591272 /* DataServiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataServiveView.swift; sourceTree = "<group>"; };
+		E8E4A70625F6B690006843CA /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,7 +99,6 @@
 			isa = PBXGroup;
 			children = (
 				E8AE958E25EADA1D003FF8B0 /* DataService.swift */,
-				E8C1D4A925F1754100591272 /* DataServiveView.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -117,7 +114,7 @@
 		E8AE958825EAD9CC003FF8B0 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				E8AE959525EADA4F003FF8B0 /* CaseStudy Model.swift */,
+				E8E4A70625F6B690006843CA /* Post.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -204,11 +201,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				E8AE959925EADBB0003FF8B0 /* DataView.swift in Sources */,
-				E8C1D4AA25F1754100591272 /* DataServiveView.swift in Sources */,
 				E8AE959325EADA3A003FF8B0 /* Case Study.swift in Sources */,
 				E8AE95A125EAE16A003FF8B0 /* FavouritesView.swift in Sources */,
+				E8E4A70725F6B690006843CA /* Post.swift in Sources */,
 				E8AE958F25EADA1D003FF8B0 /* DataService.swift in Sources */,
-				E8AE959625EADA4F003FF8B0 /* CaseStudy Model.swift in Sources */,
 				E8AE959C25EADBC0003FF8B0 /* CSTabView.swift in Sources */,
 				E8AE957825EAD958003FF8B0 /* ContentView.swift in Sources */,
 				E8AE957625EAD958003FF8B0 /* Case_StudyApp.swift in Sources */,

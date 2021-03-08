@@ -7,10 +7,34 @@
 
 import SwiftUI
 
+
+
+
+
+
 struct DataView: View {
+    
+    @State var posts:[Post] = []
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        
+        List(posts , id: \.id ) { post in
+            VStack(alignment: .leading) {
+                Text(post.name)
+                Text(post.description)
+            }
+            
+        }.onAppear {
+            Api().getPosts { (posts) in
+                self.posts = posts
+            }
+        }
+        
+        
     }
+    
+    
+    
 }
 
 struct DataView_Previews: PreviewProvider {
