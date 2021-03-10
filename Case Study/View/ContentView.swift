@@ -54,14 +54,11 @@ struct ContentView: View {
    
     
     var body: some View {
+        
         NavigationView {
         
-        
-         
-            
- 
-            
             List(gameData , id: \.id) { item in
+                
                 
                 HStack() {
                    

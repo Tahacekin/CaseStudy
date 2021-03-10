@@ -11,7 +11,7 @@ import SwiftUI
 struct Case_StudyApp: App {
     var body: some Scene {
         WindowGroup {
-            CSTabView()
+          CSTabView()
         }
     }
 }

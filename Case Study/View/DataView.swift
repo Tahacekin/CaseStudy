@@ -14,31 +14,30 @@ import SwiftUI
 
 struct DataView: View {
     
-    @State var posts:[Post] = []
+     @State var postsS:Post
     
     var body: some View {
-        
-        List(posts , id: \.id ) { post in
-            VStack(alignment: .leading) {
-                Text(post.name)
-                Text(post.description)
+       
+        VStack {
+        Text(postsS.name)
+        Text(postsS.description)
+        }.onAppear(perform: {
+            Api().getPosts { (post) in
+                self.postsS = post
             }
-            
-        }.onAppear {
-            Api().getPosts { (posts) in
-                self.posts = posts
-            }
-        }
+        })
         
-        
+    }
     }
     
     
     
-}
+
 
 struct DataView_Previews: PreviewProvider {
     static var previews: some View {
-        DataView()
+        
+        let model = Api()
+        DataView(postsS: model.p[0])
     }
 }

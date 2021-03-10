@@ -15,14 +15,16 @@ struct Post: Codable {
     
 }
 
-class Api {
+class Api: ObservableObject {
     
-    func getPosts(completion: @escaping ([Post]) -> ()) {
+    @Published var p = [Post]()
+    
+    func getPosts(completion: @escaping (Post) -> ()) {
         guard let url = URL(string: "https://api.rawg.io/api/games/3498") else { return }
         
         URLSession.shared.dataTask(with: url) { (data, _, _) in
             
-            let posts = try! JSONDecoder().decode([Post].self, from: data!)
+            let posts = try! JSONDecoder().decode(Post.self, from: data!)
        
             DispatchQueue.main.async {
                 completion(posts)

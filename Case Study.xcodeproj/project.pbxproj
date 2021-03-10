@@ -17,6 +17,7 @@
 		E8AE959925EADBB0003FF8B0 /* DataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AE959825EADBB0003FF8B0 /* DataView.swift */; };
 		E8AE959C25EADBC0003FF8B0 /* CSTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AE959B25EADBC0003FF8B0 /* CSTabView.swift */; };
 		E8AE95A125EAE16A003FF8B0 /* FavouritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AE95A025EAE16A003FF8B0 /* FavouritesView.swift */; };
+		E8E47F5725F9237D00E49CB4 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E47F5625F9237D00E49CB4 /* ViewModel.swift */; };
 		E8E4A70725F6B690006843CA /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E4A70625F6B690006843CA /* Post.swift */; };
 /* End PBXBuildFile section */
 
@@ -33,6 +34,7 @@
 		E8AE959825EADBB0003FF8B0 /* DataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataView.swift; sourceTree = "<group>"; };
 		E8AE959B25EADBC0003FF8B0 /* CSTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSTabView.swift; sourceTree = "<group>"; };
 		E8AE95A025EAE16A003FF8B0 /* FavouritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesView.swift; sourceTree = "<group>"; };
+		E8E47F5625F9237D00E49CB4 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		E8E4A70625F6B690006843CA /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -115,6 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				E8E4A70625F6B690006843CA /* Post.swift */,
+				E8E47F5625F9237D00E49CB4 /* ViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -201,6 +204,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E8AE959925EADBB0003FF8B0 /* DataView.swift in Sources */,
+				E8E47F5725F9237D00E49CB4 /* ViewModel.swift in Sources */,
 				E8AE959325EADA3A003FF8B0 /* Case Study.swift in Sources */,
 				E8AE95A125EAE16A003FF8B0 /* FavouritesView.swift in Sources */,
 				E8E4A70725F6B690006843CA /* Post.swift in Sources */,
