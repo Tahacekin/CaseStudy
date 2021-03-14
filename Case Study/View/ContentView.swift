@@ -51,46 +51,63 @@ struct Results: Codable {
 
 struct ContentView: View {
     @State var gameData = [Results]()
-   
+    
     
     var body: some View {
         
         NavigationView {
         
-            List(gameData , id: \.id) { item in
+            ScrollView {
                 
                 
-                HStack() {
-                   
-                    Image(uiImage: item.background_image.load())
-                        .resizable()
-                        .frame(width: 175 , height: 100)
-                    
-                    
-                    VStack(alignment: .leading) {
-                        Text(item.name)
-                            .font(.headline)
-                            .fontWeight(.bold)
-                        Spacer()
-                        
-                        HStack {
-                        
-                        Text("Metacritic:")
+                ForEach(gameData , id: \.id) { item in
+                    NavigationLink(
+                        destination: DataView(),
+                        label: {
+                            HStack(alignment: .center) {
+                               
+                                Image(uiImage: item.background_image.load())
+                                    .resizable()
+                                    .frame(width: 175 , height: 100)
+                                
+                                Spacer()
+                                
+                                VStack(alignment: .leading) {
+                                    Text(item.name)
+                                        .font(.title)
+                                        .fontWeight(.bold)
+                                        .foregroundColor(Color.black)
+                                    Spacer()
+                                    
+                                    HStack(alignment: .center) {
+                                    
+                                        Text("Metacritic:")
+                                            .fontWeight(.bold)
+                                            .foregroundColor(Color.black)
+                                        
+                                    Text(String(item.metacritic))
+                                        .font(.headline)
+                                        .fontWeight(.bold)
+                                        .foregroundColor(Color.red)
+                                    }
+                                    
+                                }
+                                
                             
-                        Text(String(item.metacritic))
-                            .font(.headline)
-                            .fontWeight(.bold)
-                            .foregroundColor(Color.red)
-                        }
-                        
-                    }
+                            }
+                        })
                     
-                
+                    
                 }
-            }.onAppear(perform: {
-                loadData()
-            })
-            .navigationBarTitle("Games")
+                .padding([.top, .leading, .trailing])
+                .onAppear(perform: {
+                    loadData()
+                })
+                .navigationBarTitle("Games")
+                
+            }
+            
+           
 
         
         

@@ -8,19 +8,25 @@
 import SwiftUI
 
 struct FavouritesView: View {
-    @State var gameDtt = [Results]()
+  
+    
+   
     
     var body: some View {
         
         NavigationView {
         
-            List(gameDtt , id: \.id) { pp in
+            List() {
+                
+               
+                
+                
+                
+                
             
-            NavigationLink(
-                destination: DataView(),
-                label: {
-                    ContentView()
-                })
+               
+                
+                
             
             
             

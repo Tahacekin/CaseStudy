@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-struct Post: Codable {
+struct Post: Codable, Identifiable {
     var id:Int
     var name:String
     var description:String
-    
+    var background_image:String
     
 }
 

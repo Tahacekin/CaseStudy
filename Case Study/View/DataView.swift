@@ -8,24 +8,84 @@
 import SwiftUI
 
 
+extension String {
+    
+    func load2() -> UIImage {
+        do {
+            
+            guard  let url = URL(string: self)  else {
+                return UIImage()
+            }
+            let data: Data = try Data(contentsOf: url)
+            return UIImage(data: data)
+            ?? UIImage()
+        }
+        catch {
+            print(error)
+        }
+
+        return UIImage()
+        
+        
+        
+           
+    }
+}
+
+
+
+
 
 
 
 
 struct DataView: View {
     
-     @State var postsS:Post
+    // need to somehow match the Models 
+    @State var postsS = Post(id: 1, name: "", description: "", background_image: "")
+    @State var ltus = [Post]()
     
     var body: some View {
        
-        VStack {
-        Text(postsS.name)
-        Text(postsS.description)
-        }.onAppear(perform: {
-            Api().getPosts { (post) in
-                self.postsS = post
-            }
-        })
+        ScrollView {
+            
+            
+            
+            
+            
+            VStack(alignment: .leading) {
+                
+                ZStack {
+                    
+                    
+                    // Maybe I will have to us a enum coding key
+                    
+                    
+                    Text(postsS.name)
+                        .font(.largeTitle)
+                        .fontWeight(.heavy)
+                        .padding([.leading, .bottom, .trailing])
+                }
+                
+                
+                
+                
+                
+                Divider()
+                
+                Text(postsS.description)
+                    .font(.body)
+                    .padding([.top, .leading, .trailing])
+            }.onAppear(perform: {
+                Api().getPosts { (post) in
+                    self.postsS = post
+                }
+            })
+            
+        }
+        
+        
+        
         
     }
     }
@@ -37,7 +97,7 @@ struct DataView: View {
 struct DataView_Previews: PreviewProvider {
     static var previews: some View {
         
-        let model = Api()
-        DataView(postsS: model.p[0])
+       
+        DataView()
     }
 }
