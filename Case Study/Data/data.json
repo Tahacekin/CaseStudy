@@ -123,3 +123,18 @@ if let data = data {
 print("Fetch failed: \(error?.localizedDescription ?? "Unkown error")")
 }.resume()
 }
+
+
+
+
+
+
+
+.filter({searchText.isEmpty ? true : $0.name.contains(searchText)})
+
+
+
+
+
+SearchBar(text: $searchText)
+    .padding(.top , -30)

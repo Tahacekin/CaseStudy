@@ -51,16 +51,30 @@ struct Results: Codable {
 
 struct ContentView: View {
     @State var gameData = [Results]()
-    
-    
+    @State var searchText = ""
+    @State var isEmpty = false
     var body: some View {
+
+        
+        // Commented the SearchBar put because another tab emrges when I put it here 
+        
+        
+        //SearchBar(text: $searchText)
+            //.padding(.top , -30)
+        
         
         NavigationView {
         
+           
+
+            
+            
             ScrollView {
                 
+               
                 
-                ForEach(gameData , id: \.id) { item in
+                
+                ForEach(gameData.filter({searchText.isEmpty ? true : $0.name.contains(searchText)}) , id: \.id) { item in
                     NavigationLink(
                         destination: DataView(),
                         label: {

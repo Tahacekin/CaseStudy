@@ -42,7 +42,7 @@ extension String {
 struct DataView: View {
     
     // need to somehow match the Models 
-    @State var postsS = Post(id: 1, name: "", description: "", background_image: "")
+    @State var postsS = Post(id: 1, name: "", description: "")
     @State var ltus = [Post]()
     
     var body: some View {

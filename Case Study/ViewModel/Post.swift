@@ -11,7 +11,14 @@ struct Post: Codable, Identifiable {
     var id:Int
     var name:String
     var description:String
-    var background_image:String
+    
+    
+    
+    
+    enum Ckey: String , CodingKey {
+        case backgroundimage = "background_image"
+        
+    }
     
 }
 
