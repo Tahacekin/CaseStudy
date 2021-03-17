@@ -8,16 +8,19 @@
 import SwiftUI
 
 struct CSTabView: View {
-    
+    @State var searchText2 = ""
     @State var index = 0
     
     var body: some View {
         
        
         TabView(selection: $index) {
+         
+            VStack {
+               // SearchBar(text: $searchText2)
+                ContentView()
             
-          ContentView()
-            .tabItem {
+            }.tabItem {
                 
                 
                 Image(systemName: "gamecontroller")

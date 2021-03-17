@@ -9,22 +9,29 @@ import SwiftUI
 
 struct FavouritesView: View {
   
-    
-   
+    @State var test = Results(id: 1, name: "", metacritic: 1, background_image: "")
+    @EnvironmentObject var fav: Fav
     
     var body: some View {
         
         NavigationView {
         
+            
+            // Going to fill
+            
             List() {
                 
-               
+                
+                NavigationLink(
+                    destination: /*@START_MENU_TOKEN@*/Text("Destination")/*@END_MENU_TOKEN@*/,
+                    label: {
+                        Text("Test")
+                    
+                    
+                    })
                 
                 
-               
-                
-            
-               
+          
                 
                 
             

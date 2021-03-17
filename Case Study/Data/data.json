@@ -138,3 +138,12 @@ print("Fetch failed: \(error?.localizedDescription ?? "Unkown error")")
 
 SearchBar(text: $searchText)
     .padding(.top , -30)
+
+
+
+    Text("Games")
+        .font(.largeTitle)
+        .fontWeight(.bold)
+        .foregroundColor(Color.black)
+        .multilineTextAlignment(.leading)
+        .padding([.top, .leading])

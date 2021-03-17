@@ -39,7 +39,7 @@ struct Response: Codable {
 
 
 
-struct Results: Codable {
+struct Results: Codable , Identifiable{
     var id:Int
     var name:String
     var metacritic:Int
@@ -50,9 +50,13 @@ struct Results: Codable {
     
 
 struct ContentView: View {
+   
+    @State var test = Results(id: 1, name: "", metacritic: 1, background_image: "")
     @State var gameData = [Results]()
     @State var searchText = ""
     @State var isEmpty = false
+    @ObservedObject var fav = Fav()
+    
     var body: some View {
 
         
@@ -62,71 +66,93 @@ struct ContentView: View {
         //SearchBar(text: $searchText)
             //.padding(.top , -30)
         
-        
-        NavigationView {
-        
-           
+        VStack(alignment: .leading) {
+            
+            Text("Games")
+                .font(.largeTitle)
+                .fontWeight(.bold)
+                .foregroundColor(Color.black)
+                .multilineTextAlignment(.leading)
+                .padding([.top, .leading])
+            
+            SearchBar(text: $searchText)
+            NavigationView {
+            
+                
 
-            
-            
-            ScrollView {
-                
-               
                 
                 
-                ForEach(gameData.filter({searchText.isEmpty ? true : $0.name.contains(searchText)}) , id: \.id) { item in
-                    NavigationLink(
-                        destination: DataView(),
-                        label: {
-                            HStack(alignment: .center) {
-                               
-                                Image(uiImage: item.background_image.load())
-                                    .resizable()
-                                    .frame(width: 175 , height: 100)
-                                
-                                Spacer()
-                                
-                                VStack(alignment: .leading) {
-                                    Text(item.name)
-                                        .font(.title)
-                                        .fontWeight(.bold)
-                                        .foregroundColor(Color.black)
+                ScrollView {
+                    
+                   
+                    
+    ForEach(gameData.filter({searchText.isEmpty ? true : $0.name.contains(searchText)}) , id: \.id) { item in
+                        NavigationLink(
+                            destination: DataView(),
+                            label: {
+                                HStack(alignment: .center) {
+                                   
+                                    Image(uiImage: item.background_image.load())
+                                        .resizable()
+                                        .frame(width: 175 , height: 100)
+                                    
                                     Spacer()
                                     
-                                    HStack(alignment: .center) {
-                                    
-                                        Text("Metacritic:")
+                                    VStack(alignment: .leading) {
+                                        Text(item.name)
+                                            .font(.title)
                                             .fontWeight(.bold)
                                             .foregroundColor(Color.black)
+                                        Spacer()
                                         
-                                    Text(String(item.metacritic))
-                                        .font(.headline)
-                                        .fontWeight(.bold)
-                                        .foregroundColor(Color.red)
+                                        HStack(alignment: .center) {
+                                        
+                                            Text("Metacritic:")
+                                                .fontWeight(.bold)
+                                                .foregroundColor(Color.black)
+                                            
+                                        Text(String(item.metacritic))
+                                            .font(.headline)
+                                            .fontWeight(.bold)
+                                            .foregroundColor(Color.red)
+                                        }
+                                        
                                     }
                                     
-                                }
                                 
+                                }
+                           
+        if self.fav.contains(test) {
+            Spacer()
+            Image(systemName: "heart.fill")
+                .accessibility(label: Text("This is a favorite resort"))
+                .foregroundColor(.red)
+        }
+
                             
-                            }
-                        })
+                            
+                            })
+                        
+                        
+                    }
+                    .padding([.top, .leading, .trailing])
+                    .onAppear(perform: {
+                        loadData()
+                    })
                     
                     
                 }
-                .padding([.top, .leading, .trailing])
-                .onAppear(perform: {
-                    loadData()
-                })
-                .navigationBarTitle("Games")
                 
-            }
-            
-           
+               
 
+            
+            
+            
+            }.environmentObject(fav)
         
         
-        
-     }
+        }
+       
     
     }
     

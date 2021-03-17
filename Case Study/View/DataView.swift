@@ -42,17 +42,16 @@ extension String {
 struct DataView: View {
     
     // need to somehow match the Models 
+    
+    @State var tset = Results(id: 1, name: "", metacritic: 1, background_image: "")
     @State var postsS = Post(id: 1, name: "", description: "")
     @State var ltus = [Post]()
-    
+    @EnvironmentObject var fav: Fav
     var body: some View {
        
         ScrollView {
             
-            
-            
-            
-            
+        
             VStack(alignment: .leading) {
                 
                 ZStack {
@@ -82,7 +81,19 @@ struct DataView: View {
                 }
             })
             
+        
+            Button(fav.contains(tset) ? "Remove from Favorites" : "Add to Favorites") {
+                if self.fav.contains(self.tset) {
+                    self.fav.removeGame(self.tset)
+                } else {
+                    self.fav.add(self.tset)
+                }
+            }
+            .padding()
+        
+        
         }
+        
         
         
         
