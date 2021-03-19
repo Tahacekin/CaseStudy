@@ -27,7 +27,7 @@ class Fav: ObservableObject {
         
         objectWillChange.send()
         games.insert(game.id)
-        
+        save()
     }
     
     func removeGame(_ game:Results) {

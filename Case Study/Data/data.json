@@ -147,3 +147,52 @@ SearchBar(text: $searchText)
         .foregroundColor(Color.black)
         .multilineTextAlignment(.leading)
         .padding([.top, .leading])
+
+
+
+
+
+
+
+        TextField("Search For Games", text: $text)
+            .padding(7)
+            .padding(.horizontal , 25)
+            .background(Color(.systemGray6))
+            .cornerRadius(8)
+
+
+
+
+
+
+            if self.fav.contains(test) {
+                    
+                Spacer()
+                Image(systemName: "heart.fill")
+                    .accessibility(label: Text("This is a favorite resort"))
+                    .foregroundColor(.red)
+            
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            Button(fav.contains(tset) ? "Remove from Favorites" : "Add to Favorites") {
+                if self.fav.contains(self.tset) {
+                    self.fav.removeGame(self.tset)
+                } else {
+                    self.fav.add(self.tset)
+                }
+            }
+            .padding()

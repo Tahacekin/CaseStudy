@@ -11,14 +11,14 @@ struct Post: Codable, Identifiable {
     var id:Int
     var name:String
     var description:String
+    var reddit_url:String
+    var website:String
+    var background_image:String
     
+    //enum Ckey: String , CodingKey {
+    //case backgroundimage = "background_image"
     
-    
-    
-    enum Ckey: String , CodingKey {
-        case backgroundimage = "background_image"
-        
-    }
+    // }
     
 }
 
@@ -32,13 +32,13 @@ class Api: ObservableObject {
         URLSession.shared.dataTask(with: url) { (data, _, _) in
             
             let posts = try! JSONDecoder().decode(Post.self, from: data!)
-       
+            
             DispatchQueue.main.async {
                 completion(posts)
             }
-        
-        
-        
+            
+            
+            
         }.resume()
     }
     

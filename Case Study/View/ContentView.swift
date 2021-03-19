@@ -66,16 +66,10 @@ struct ContentView: View {
         //SearchBar(text: $searchText)
             //.padding(.top , -30)
         
-        VStack(alignment: .leading) {
+     
             
-            Text("Games")
-                .font(.largeTitle)
-                .fontWeight(.bold)
-                .foregroundColor(Color.black)
-                .multilineTextAlignment(.leading)
-                .padding([.top, .leading])
+          
             
-            SearchBar(text: $searchText)
             NavigationView {
             
                 
@@ -84,7 +78,9 @@ struct ContentView: View {
                 
                 ScrollView {
                     
-                   
+                    SearchBar(text: $searchText) .onAppear(perform: {
+                        loadData()
+                    })
                     
     ForEach(gameData.filter({searchText.isEmpty ? true : $0.name.contains(searchText)}) , id: \.id) { item in
                         NavigationLink(
@@ -135,10 +131,9 @@ struct ContentView: View {
                         
                         
                     }
+    .navigationBarTitle("Games")
                     .padding([.top, .leading, .trailing])
-                    .onAppear(perform: {
-                        loadData()
-                    })
+                   
                     
                     
                 }
@@ -151,7 +146,7 @@ struct ContentView: View {
             }.environmentObject(fav)
         
         
-        }
+        
        
     
     }

@@ -13,13 +13,13 @@ struct CSTabView: View {
     
     var body: some View {
         
-       
+        
         TabView(selection: $index) {
-         
-            VStack {
-               // SearchBar(text: $searchText2)
-                ContentView()
             
+            VStack {
+                // SearchBar(text: $searchText2)
+                ContentView()
+                
             }.tabItem {
                 
                 
@@ -30,7 +30,7 @@ struct CSTabView: View {
             .tag(0)
             
             
-           FavouritesView()
+            FavouritesView()
                 .tabItem {
                     Image(systemName: "star.fill")
                     Text("Favourites")
@@ -44,11 +44,11 @@ struct CSTabView: View {
             
         }
         
-    
-    
-    
-    
-    
+        
+        
+        
+        
+        
     }
     
 }

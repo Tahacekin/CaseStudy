@@ -10,7 +10,7 @@ import SwiftUI
 struct FavouritesView: View {
   
     @State var test = Results(id: 1, name: "", metacritic: 1, background_image: "")
-    @EnvironmentObject var fav: Fav
+    @ObservedObject var fav = Fav()
     
     var body: some View {
         
@@ -47,6 +47,8 @@ struct FavouritesView: View {
 
 struct FavouritesView_Previews: PreviewProvider {
     static var previews: some View {
+        
+      
         FavouritesView()
     }
 }

@@ -18,17 +18,17 @@ extension String {
             }
             let data: Data = try Data(contentsOf: url)
             return UIImage(data: data)
-            ?? UIImage()
+                ?? UIImage()
         }
         catch {
             print(error)
         }
-
+        
         return UIImage()
         
         
         
-           
+        
     }
 }
 
@@ -42,28 +42,31 @@ extension String {
 struct DataView: View {
     
     // need to somehow match the Models 
-    
+    @Environment(\.openURL) var openURL
     @State var tset = Results(id: 1, name: "", metacritic: 1, background_image: "")
-    @State var postsS = Post(id: 1, name: "", description: "")
+    @State var postsS = Post(id: 1, name: "", description: "", reddit_url: "", website: "", background_image: "")
     @State var ltus = [Post]()
     @EnvironmentObject var fav: Fav
     var body: some View {
-       
+        
         ScrollView {
             
-        
+            
             VStack(alignment: .leading) {
                 
                 ZStack {
                     
                     
                     // Maybe I will have to us a enum coding key
-                    
+                    Image(uiImage: postsS.background_image.load2()).resizable()
+                        //.frame(width: 500 , height: 400)
+                        .scaledToFit()
                     
                     Text(postsS.name)
                         .font(.largeTitle)
                         .fontWeight(.heavy)
-                        .padding([.leading, .bottom, .trailing])
+                        .foregroundColor(Color.white)
+                        .padding(.top)
                 }
                 
                 
@@ -72,26 +75,64 @@ struct DataView: View {
                 
                 Divider()
                 
-                Text(postsS.description)
-                    .font(.body)
-                    .padding([.top, .leading, .trailing])
-            }.onAppear(perform: {
-                Api().getPosts { (post) in
-                    self.postsS = post
+                VStack {
+                    Text("Game Description")
+                        .font(.headline)
+                        .fontWeight(.bold)
+                        .padding([.top, .leading, .trailing])
+                    
+                    
+                    Text("" + postsS.description)
+                        .font(.body)
+                        .multilineTextAlignment(.center)
+                        .padding()
+                        
+                }.onAppear(perform: {
+                    Api().getPosts { (post) in
+                        self.postsS = post
+                    }
+                })
+                .toolbar(content: {
+                    Button(fav.contains(tset) ? "Remove from Favorites" : "Add to Favorites") {
+                        if self.fav.contains(self.tset) {
+                            self.fav.removeGame(self.tset)
+                        } else {
+                            self.fav.add(self.tset)
+                        }
+                    }
+                    .padding()
+
+                })
+                    
                 }
-            })
+                
+              
             
-        
-            Button(fav.contains(tset) ? "Remove from Favorites" : "Add to Favorites") {
-                if self.fav.contains(self.tset) {
-                    self.fav.removeGame(self.tset)
-                } else {
-                    self.fav.add(self.tset)
+            
+            Divider()
+            
+            VStack {
+                Button("Visit Reddit") {
+                    
+                    openURL(URL(string: postsS.reddit_url)!)
+                    
                 }
+                .padding(.vertical)
+                Divider()
+                
+                Button("Visit Website") {
+                    openURL(URL(string: postsS.website)!)
+                    
+                }
+                .padding(.vertical)
+                
+                
+                
             }
-            .padding()
-        
-        
+            .padding(.vertical)
+            
+            
+            
         }
         
         
@@ -99,16 +140,16 @@ struct DataView: View {
         
         
     }
-    }
-    
-    
-    
+}
+
+
+
 
 
 struct DataView_Previews: PreviewProvider {
     static var previews: some View {
         
-       
+        
         DataView()
     }
 }
